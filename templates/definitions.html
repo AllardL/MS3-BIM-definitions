@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="collapsible popout" data-collapsible="accordion">
+        {% for definition in definitions %}
+            <li>
+                <div class="collapsible-header"><i class="material-icons">assignment</i><strong>{{definition.term}}</strong><i class="material-icons center">language</i><strong>{{definition.language}}</strong></div>    
+                <div class="collapsible-body"><span>{{definition.description}}</span></div>
+            </li>    
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

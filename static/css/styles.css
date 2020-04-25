@@ -1,0 +1,128 @@
+/* ------------------Text---------------- */
+.center { 
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.heading {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.subheading {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h3 {
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+strong {
+    font-weight: 800;
+}
+
+/*-------------------------Navbar-------------- */
+
+.logo {
+    height: 22px;
+}
+
+.navbar-brand {
+    font-size: 25px;
+}
+
+nav {
+    background-color: rgb(168, 222, 255);
+}
+
+
+
+
+/*-------------------------General Layout-------------- */
+
+.container {
+    max-width: 2050px;
+}
+
+.btn {
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.text-lg-right {
+    margin-right: 0px !important;
+}
+
+footer {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: 0;
+    width: 100vw;
+}
+
+hr {
+    border-color: blue;
+}
+
+/*-------------------------Inputform-------------- */
+
+.col-md-6.inputform {
+    max-width: 600px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border: 1px;
+    border-radius: 15px !important;
+}
+
+.row.inputform {
+    margin-top: 5vh;
+}
+
+.rounded {
+    border-radius: 15px !important;
+}
+
+input[type="checkbox"] {
+    width : 10px !important;
+    margin-left: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+label[for="softwarevendor"]{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/*-------------------------Media queries-------------- */
+@media (min-width: 575px) and (min-height: 800px){
+    footer {
+        position: fixed !important;
+        left: auto;
+        right: auto;
+        bottom: 0;
+        width: 100vw
+    }
+
+    .logo {
+        height: 40px;
+    }
+
+    .navbar-brand {
+        font-size: 50px
+    }
+
+    .heading {
+        font-size: 2em;
+        font-weight: 800;
+    }   
+
+}
