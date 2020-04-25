@@ -6,8 +6,7 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 
 app.config["MONGO_DBNAME"]= 'BIMDefinitions'
-app.config["MONGO_URI"] = os.environ.get('MONGODB_TERMS')
-#app.config["MONGO_URI"] = 'mongodb+srv://AllardDB:RxBuROru0OyhHyMC@gcpbelgium-fdk0n.gcp.mongodb.net/BIMDefinitions?retryWrites=true&w=majority'
+app.config["MONGO_URI"] = 'mongodb+srv://AllardDB:RxBuROru0OyhHyMC@gcpbelgium-fdk0n.gcp.mongodb.net/BIMDefinitions?retryWrites=true&w=majority'
 
 mongo = PyMongo(app)
 
@@ -30,5 +29,5 @@ def insert_definition():
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
-        port=int(os.environ.get('PORT')),
+        port=int(os.environ.get('PORT')), 
         debug=True)
