@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Edit Definition{% endblock %}
+{% block content %}
+
+<h3 class="center">Edit Definition</h3>
+<form action="{{url_for('update_definition', definition_id = definition._id) }} " method="POST" class="col-lg-8 col-md-10 mx-auto">
+        <div class="row form-group">
+        <div class="col-12">
+            <i class="material-icons prefix">assignment</i>
+            <label>BIM Term</label>
+            <input id="term" name="term" type="text" class="form-control" value="{{definition.term}}">
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-12">
+            <label for="language"><i class="material-icons prefix">language</i> Language</label>
+            <select class="form-control" id="language" name="language">
+                {% for language in languages %}
+                    {% if language.name == definition.language %}
+                        <option value="{{language.name}}" selected> {{language.name}}</option>
+                    {% else %}
+                        <option value="{{language.name}}">{{language.name}}</option>                        
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row form-group">            
+        <div class="col-12">
+            <i class="material-icons prefix">subject</i>
+            <label> Definition</label>
+            <textarea name="description" id="description" type="tel" class="form-control">{{definition.description}}</textarea>               
+        </div>
+    </div>
+    <div class="row form-group center">
+        <button class="btn btn-primary" type="submit">
+            <i class="material-icons right">playlist_add_check</i>Update Term
+        </button>
+    </div>    
+</form>
+{% endblock %}

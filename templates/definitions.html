@@ -1,16 +1,30 @@
 {% extends 'base.html' %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-<div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-        <ul class="collapsible popout" data-collapsible="accordion">
-        {% for definition in definitions %}
-            <li>
-                <div class="collapsible-header"><i class="material-icons">assignment</i><strong>{{definition.term}}</strong><i class="material-icons center">language</i><strong>{{definition.language}}</strong></div>    
-                <div class="collapsible-body"><span>{{definition.description}}</span></div>
-            </li>    
-        {% endfor %}
-        </ul>
+
+<div class="accordion" id="accordion">
+    {% for definition in definitions %}
+    <div class="card">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{definition._id}}" aria-expanded="false" aria-controls="{{definition._id}}">
+            <div class="row card-header" id="{{definition._id}}">
+                    <div class="col-lg-6 col-md-12">
+                        <i class="material-icons">expand_more</i><strong>{{definition.term}}</strong>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <i class="material-icons">language</i><strong>{{definition.language}}</strong>
+                    </div>
+            </div>
+        </button>
+
+        <div id="collapse{{definition._id}}" class="collapse" aria-labelledby="{{definition._id}}" data-parent="#accordion">
+            <div class="card-body">
+                <span>{{definition.description}}</span>
+                <div class="center">
+                    <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary btn_small">Edit</a>               
+                </div>  
+            </div>
+        </div>
     </div>
+    {% endfor %}
 </div>
-{% endblock %}
+{% endblock %}   

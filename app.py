@@ -3,13 +3,13 @@ from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
-MONGO_URI = (os.environ.get('MONGO_URI'))
+
+#MONGO_URI = (os.environ.get('MONGO_URI'))
 
 app = Flask(__name__)
 
-app.config["MONGO_DBNAME"]= 'BIMDefinitions'
-app.config["MONGO_URI"] = MONGO_URI
-#app.config["MONGO_URI"] = 'mongodb+srv://AllardDB:RxBuROru0OyhHyMC@gcpbelgium-fdk0n.gcp.mongodb.net/BIMDefinitions?retryWrites=true&w=majority'
+#app.config["MONGO_URI"] = MONGO_URI
+app.config["MONGO_URI"] = 'mongodb+srv://AllardDB:RxBuROru0OyhHyMC@gcpbelgium-fdk0n.gcp.mongodb.net/BIMDefinitions?retryWrites=true&w=majority'
 
 mongo = PyMongo(app)
 
@@ -21,13 +21,32 @@ def get_definitions():
 @app.route('/add_definition')
 def add_definition():
     return render_template('adddefinition.html',
-    languages=mongo.db.language.find())
+                            languages=mongo.db.language.find())
 
 @app.route('/insert_definition', methods=['POST'])
 def insert_definition():
     definitions = mongo.db.definitions
     definitions.insert_one(request.form.to_dict())
     return redirect(url_for('get_definitions'))
+
+@app.route('/edit_definition/<definition_id>')
+def edit_definition(definition_id):
+    the_definition = mongo.db.definitions.find_one({"_id": ObjectId(definition_id)})
+    all_languages = mongo.db.language.find()
+    return render_template('editdefinition.html', definition=the_definition, languages = all_languages)
+
+@app.route('/update_definition/<definition_id>', methods=["POST"])
+def update_definition(definition_id):
+    definitions = mongo.db.definitions
+    definitions.update( {'_id': ObjectId(definition_id)},
+    {
+        'term':request.form.get('term'),
+        'language':request.form.get('language'),
+        'description': request.form.get('description')
+    })
+    return redirect(url_for('get_definitions'))
+
+
 
 
 if __name__ == '__main__':

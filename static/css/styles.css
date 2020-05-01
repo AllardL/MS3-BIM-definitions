@@ -68,38 +68,29 @@ hr {
     border-color: blue;
 }
 
+body {
+    text-decoration: none;
+}
+
+/*-------------------------Accordion-------------- */
+
+.card .btn {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.card-header {
+    text-align: left;
+}
+
 /*-------------------------Inputform-------------- */
 
-.col-md-6.inputform {
-    max-width: 600px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    border: 1px;
-    border-radius: 15px !important;
-}
-
-.row.inputform {
-    margin-top: 5vh;
-}
-
-.rounded {
-    border-radius: 15px !important;
-}
-
-input[type="checkbox"] {
-    width : 10px !important;
-    margin-left: 15px;
-}
-
-.form-group {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-}
-
-label[for="softwarevendor"]{
-    margin-top: auto;
-    margin-bottom: auto;
+.btn_small {
+    height: 24px;
+    width: 80px;
+    line-height: 24px;
+    margin: 15px !important;
+    padding: 0 0.5em;
 }
 
 /*-------------------------Media queries-------------- */
