@@ -26,7 +26,14 @@ def add_definition():
 @app.route('/insert_definition', methods=['POST'])
 def insert_definition():
     definitions = mongo.db.definitions
-    definitions.insert_one(request.form.to_dict())
+    form = request.form.to_dict()
+    term = {
+        'term':form["term"],
+        'language':form["language"],
+        'description': form["description"],
+        'uniqueKey':form["term"].lower().replace(" ","")+form["language"].lower()
+    }
+    definitions.insert_one(term)
     return redirect(url_for('get_definitions'))
 
 @app.route('/edit_definition/<definition_id>')
@@ -38,11 +45,13 @@ def edit_definition(definition_id):
 @app.route('/update_definition/<definition_id>', methods=["POST"])
 def update_definition(definition_id):
     definitions = mongo.db.definitions
+    form = request.form.to_dict()
     definitions.update( {'_id': ObjectId(definition_id)},
     {
-        'term':request.form.get('term'),
-        'language':request.form.get('language'),
-        'description': request.form.get('description')
+        'term':form["term"],
+        'language':form["language"],
+        'description': form["description"],
+        'uniqueKey':form["term"].lower().replace(" ","")+form["language"].lower()
     })
     return redirect(url_for('get_definitions'))
 
