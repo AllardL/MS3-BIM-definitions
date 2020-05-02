@@ -46,7 +46,17 @@ def update_definition(definition_id):
     })
     return redirect(url_for('get_definitions'))
 
+@app.route('/user_signup')
+def user_signup():
+        return render_template("user/signup.html")
 
+@app.route('/user_login')
+def user_login():
+        return render_template("user/login.html")
+
+@app.route('/user_edit')
+def user_edit():
+        return render_template("user/edit.html")
 
 
 if __name__ == '__main__':
