@@ -48,8 +48,8 @@
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Login/Sign Up</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Sign Up</a>
-                        <a class="dropdown-item" href="#">Login</a>
+                        <a class="dropdown-item" href="{{url_for('user_signup')}}">Sign Up</a>
+                        <a class="dropdown-item" href="{{url_for('user_login')}}">Login</a>
                     </div>
                     </li>
                     {% endif %}
@@ -120,7 +120,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.collapse').collapse()
+            $('.collapse').collapse();
         });
     </script>
 </body>

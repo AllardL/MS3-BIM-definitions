@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+
+<div class="col-lg-8 col-md-10 mx-auto">  
+    <form  id="singnupFrom" onSubmit="return validation();">
+        <div class="form-group">
+            <label for="user">Username</label>
+            <input type="text" class="form-control" id="user" aria-describedby="userHelp" required>
+            <small id="userHelp" class="form-text text-muted">Your username will be visible when adding or editing terms</small>
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+            <small id="emailHelp" class="form-text text-muted">Input needs to be a valid email format</small>
+        </div>
+        <div class="form-group">
+            <label for="password control-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required/>
+        </div>
+        <div class="form-group">
+            <label for="confirm control-label">Repeat Password</label>
+            <input type="password" class="form-control" id="cPassword" name="cpassword" required/>
+        </div>
+        <button type="submit" name="submit" value="Sign Up"  class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
