@@ -2,21 +2,29 @@
 {% block title %}SignUp{% endblock %}
 {% block content %}
 
-<div class="col-lg-8 col-md-10 mx-auto">  
-    <form  id="singnupFrom" onSubmit="return validation();">
+<div class="col-lg-8 col-md-10 mx-auto"> 
+    <form action="{{url_for('add_user') }} " method="POST" class="col-lg-8 col-md-10 mx-auto">
         <div class="form-group">
             <label for="user">Username</label>
-            <input type="text" class="form-control" id="user" aria-describedby="userHelp" required>
+            <input type="text" class="form-control" id="user_name" aria-describedby="userHelp" name="user_name" required value={{user_name}}>
             <small id="userHelp" class="form-text text-muted">Your username will be visible when adding or editing terms</small>
+            {% if userValidation == False %}
+                <div class="failed">Username is already in use</div>
+            {% endif %} 
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
-            <small id="emailHelp" class="form-text text-muted">Input needs to be a valid email format</small>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="user_email" required value={{user_email}}>
+            {% if emailValidation == False %}
+                <div class="failed">Please enter a valid email address</div>
+            {% endif %}        
         </div>
         <div class="form-group">
             <label for="password control-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" required/>
+            {% if pwValidation == False %}
+                <div class="failed">Passwords did not match</div>
+            {% endif %}
         </div>
         <div class="form-group">
             <label for="confirm control-label">Repeat Password</label>
