@@ -2,16 +2,23 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 
+<h3 class="center">Login</h3>
 <div class="col-lg-8 col-md-10 mx-auto">  
-    <form>
+    <form action="{{url_for('check_user') }}" method="POST" class="col-lg-8 col-md-10 mx-auto">
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="user_email" required value={{user_email}}>
             <small id="emailHelp" class="form-text text-muted">Input needs to be a valid email format</small>
+            {% if emailValidation == False %}
+                <div class="failed">This email address is not yet registered</div>
+            {% endif %}  
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" id="password" name="password" required>
+            {% if pwValidation == False %}
+                <div class="failed">The password is not correct</div>
+            {% endif %}
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

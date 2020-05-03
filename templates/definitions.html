@@ -19,9 +19,16 @@
         <div id="collapse{{definition._id}}" class="collapse" aria-labelledby="{{definition._id}}" data-parent="#accordion">
             <div class="card-body">
                 <span>{{definition.description}}</span>
+                <hr>
                 <div class="center">
-                    <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary btn_small">Edit</a>               
+                    <span>Last modified by: {{definition.user}}</span>
+                    {% if session.name %}
+                        <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary btn_small">Edit</a>
+                    {% else %} 
+                        <a href="{{url_for('user_login')}}" class="btn btn-primary btn_small">Login to Edit or Add terms</a>
+                    {% endif %}         
                 </div>  
+                
             </div>
         </div>
     </div>

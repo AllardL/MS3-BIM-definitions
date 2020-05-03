@@ -2,8 +2,9 @@
 {% block title %}SignUp{% endblock %}
 {% block content %}
 
+<h3 class="center">Sign Up</h3>
 <div class="col-lg-8 col-md-10 mx-auto"> 
-    <form action="{{url_for('add_user') }} " method="POST" class="col-lg-8 col-md-10 mx-auto">
+    <form action="{{url_for('add_user') }}" method="POST" class="col-lg-8 col-md-10 mx-auto">
         <div class="form-group">
             <label for="user">Username</label>
             <input type="text" class="form-control" id="user_name" aria-describedby="userHelp" name="user_name" required value={{user_name}}>
@@ -16,7 +17,7 @@
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="user_email" required value={{user_email}}>
             {% if emailValidation == False %}
-                <div class="failed">Please enter a valid email address</div>
+                <div class="failed">This email address is not valid or already in use</div>
             {% endif %}        
         </div>
         <div class="form-group">

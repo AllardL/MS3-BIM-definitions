@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for 
+from flask import Flask, render_template, redirect, request, url_for, session 
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import bcrypt
@@ -13,6 +13,7 @@ app = Flask(__name__)
 
 #app.config["MONGO_URI"] = MONGO_URI
 app.config["MONGO_URI"] = 'mongodb+srv://AllardDB:RxBuROru0OyhHyMC@gcpbelgium-fdk0n.gcp.mongodb.net/BIMDefinitions?retryWrites=true&w=majority'
+app.config["SECRET_KEY"] = "allard85368"
 
 mongo = PyMongo(app)
 
@@ -34,6 +35,7 @@ def insert_definition():
         'term':form["term"],
         'language':form["language"],
         'description': form["description"],
+        'user': session['name'],        
         'uniqueKey':form["term"].lower().replace(" ","")+form["language"].lower()
     }
     definitions.insert_one(term)
@@ -54,10 +56,13 @@ def update_definition(definition_id):
         'term':form["term"],
         'language':form["language"],
         'description': form["description"],
+        'user': session['name'],
         'uniqueKey':form["term"].lower().replace(" ","")+form["language"].lower()
     })
     return redirect(url_for('get_definitions'))
 
+
+#USER RELATED 
 @app.route('/user_signup')
 def user_signup():
         return render_template("user/signup.html")
@@ -68,10 +73,12 @@ def add_user():
     user = mongo.db.user
     form = request.form.to_dict()
     name = form["user_name"]
+    email = form["user_email"]
     userValidation = True
     pwValidation = True
     emailValidation = True
     userCount = user.find({'name': name }).count()
+    emailCount = user.find({'email': email }).count()
 
     #user validation
     if  userCount > 0:
@@ -80,7 +87,7 @@ def add_user():
     #email validation
     pattern = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
     _email = pattern.match(form["user_email"])
-    if form["user_email"] not in str(_email):
+    if email not in str(_email) or emailCount > 0:
         emailValidation = False
 
     #password validation
@@ -89,7 +96,6 @@ def add_user():
 
     #add or refuse user
     Validation = [userValidation, emailValidation, pwValidation]
-
     if False in Validation:
         return render_template("user/signup.html",user_name = form["user_name"], user_email = form["user_email"], userValidation= userValidation, emailValidation = emailValidation, pwValidation = pwValidation)        
     else:
@@ -97,25 +103,100 @@ def add_user():
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(pw, salt)
         User = {
-            'name':form["user_name"],
-            'email':form["user_email"],
+            'name':name,
+            'email':email,
             'password': hashed_password,
         }
+        session['name'] = name
         user.insert_one(User)
         return redirect(url_for('get_definitions'))
 
-
-
-
-
-
 @app.route('/user_login')
 def user_login():
-        return render_template("user/login.html")
+    return render_template("user/login.html")
+
+
+@app.route('/check_user', methods=['GET', 'POST'])
+def check_user():
+    form = request.form.to_dict()
+    email = form["user_email"]
+    users = mongo.db.user
+    userCount = users.find({'email': email }).count()
+    if userCount > 0:
+        user = users.find_one({"email": email})
+        userpw = user['password']
+        formpw = form['password'].encode('utf8')
+        if bcrypt.checkpw(formpw, userpw):
+            session['name'] = user['name']
+            return redirect(url_for('get_definitions'))
+        else:
+            pwValidation = False
+            return render_template("user/login.html", user_email = email, pwValidation = pwValidation)
+    else:
+        emailValidation = False
+        return render_template("user/login.html", emailValidation = emailValidation)
 
 @app.route('/user_edit')
 def user_edit():
-        return render_template("user/edit.html")
+    users = mongo.db.user
+    user = users.find_one({"name": session["name"]})
+    email = user['email']        
+    return render_template("user/edit.html", user_email = email, user_name = session['name'])
+
+@app.route('/update_user', methods=["POST"])
+def update_user():
+    users = mongo.db.user
+    form = request.form.to_dict()
+    userValidation = True
+    pwValidation = True
+    emailValidation = True
+    email = form["user_email"]
+    user = users.find_one({"name": session["name"]})
+    userID = user['_id']
+    userpw = user['password']
+    formpw = form['oldPassword'].encode('utf8')
+
+    #user validation
+    name = form["user_name"]
+    userCount = users.find({'name': name }).count()
+    if  userCount > 0 and name != session["name"]:
+        userValidation = False
+
+    #password validation
+    if bcrypt.checkpw(formpw, userpw):
+        pwValidationOld = True
+    else:
+        pwValidationOld = False
+
+    #new password validation
+    if len(form['password']) > 0:
+        if form["password"] != form["cpassword"]:
+            pwValidation = False
+        elif pwValidationOld == True and userValidation == True:
+            pwValidation = True
+            pw = form["password"].encode('utf8')
+            salt = bcrypt.gensalt()
+            userpw = bcrypt.hashpw(pw, salt)
+
+    #add or refuse userupdate
+    Validation = [userValidation, pwValidationOld, pwValidation]
+    if False in Validation:
+        return render_template("user/edit.html",user_name = form["user_name"], user_email = form["user_email"], userValidation= userValidation, pwValidationOld = pwValidationOld, pwValidation = pwValidation)        
+    else:
+        session['name']=name
+        users.update( {'_id': ObjectId(userID)},
+            {
+                'name':name,
+                'email': email,
+                'password': userpw,
+            })
+    return redirect(url_for('get_definitions'))
+
+
+@app.route('/logout')
+def logout():
+    session.pop('name')
+    return redirect(url_for('get_definitions'))
 
 
 if __name__ == '__main__':
