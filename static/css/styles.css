@@ -34,10 +34,9 @@ strong {
     font-size: 25px;
 }
 
-nav {
+.lightblue {
     background-color: rgb(168, 222, 255);
 }
-
 
 
 
@@ -45,6 +44,7 @@ nav {
 
 .container {
     max-width: 2050px;
+    margin-bottom: 15px;
 }
 
 .btn {
@@ -66,6 +66,8 @@ footer {
 
 hr {
     border-color: blue;
+    margin: 0;
+    margin-bottom: 15px;
 }
 
 body {
