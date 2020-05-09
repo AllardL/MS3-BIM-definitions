@@ -2,36 +2,67 @@
 {% block title %}Home Page{% endblock %}
 {% block content %}
 
-<div class="accordion" id="accordion">
-    {% for definition in definitions %}
-    <div class="card">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{definition._id}}" aria-expanded="false" aria-controls="{{definition._id}}">
-            <div class="row card-header" id="{{definition._id}}">
-                    <div class="col-lg-6 col-md-12">
-                        <i class="material-icons">expand_more</i><strong>{{definition.term}}</strong>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <i class="material-icons">language</i><strong>{{definition.language}}</strong>
-                    </div>
-            </div>
-        </button>
+<form action="{{url_for('search_definition') }} " method="POST" >
+    <div class="row search">
+        <div class="col-lg-5 col-md-4 col-sm-12 form-group">
+            <input type="text" class="form-control" name = "s_term" placeholder="Search for Term" value="{{s_term}}">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+            <select class="form-control" id="language" name="s_language">
+                {% if s_language %}
+                    <option>{{s_language}}</option>
+                {% endif %}
+                {% for language in languages %}
+                    <option value="{{language.name}}">{{language.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+            <input type="text" class="form-control" name = "s_editor" placeholder="Search for Editor" value="{{s_editor}}">
+        </div>
+        <div class="col-4 col-md-2 col-lg-1 form-group">
+            <button class="btn btn-primary search" type="submit">
+                <i class="material-icons right">search</i>
+            </button>
+        </div> 
+    </div>
+</form>
 
-        <div id="collapse{{definition._id}}" class="collapse" aria-labelledby="{{definition._id}}" data-parent="#accordion">
-            <div class="card-body">
-                <span>{{definition.description}}</span>
-                <hr>
-                <div class="center">
-                    <span>Last modified by: {{definition.user}}</span>
-                    {% if session.name %}
-                        <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary btn_small">Edit</a>
-                    {% else %} 
-                        <a href="{{url_for('user_login')}}" class="btn btn-primary btn_small">Login to Edit or Add terms</a>
-                    {% endif %}         
-                </div>  
-                
+
+<div class="accordion" id="accordion">
+    {% if result == 0 %}
+        <h3 class="center">We found no results for your search!</h3>
+    {% else %}
+        {% for definition in definitions %}
+        <div class="card">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{definition._id}}" aria-expanded="false" aria-controls="{{definition._id}}">
+                <div class="row card-header" id="{{definition._id}}">
+                        <div class="col-lg-6 col-md-12">
+                            <i class="material-icons">expand_more</i><strong>{{definition.term}}</strong>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <i class="material-icons">language</i><strong>{{definition.language}}</strong>
+                        </div>
+                </div>
+            </button>
+
+            <div id="collapse{{definition._id}}" class="collapse" aria-labelledby="{{definition._id}}" data-parent="#accordion">
+                <div class="card-body">
+                    <span>{{definition.description}}</span>
+                    <hr>
+                    <div class="center">
+                        <span>Last modified by: {{definition.user}}</span>
+                        {% if session.name %}
+                            <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary btn_small">Edit</a>
+                        {% else %} 
+                            <a href="{{url_for('user_login')}}" class="btn btn-primary btn_small">Login to Edit or Add terms</a>
+                        {% endif %}         
+                    </div>  
+                    
+                </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}   

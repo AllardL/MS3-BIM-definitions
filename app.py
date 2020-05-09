@@ -20,12 +20,38 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/get_definitions')
 def get_definitions():
-        return render_template("definitions.html", definitions = mongo.db.definitions.find().sort("term",pymongo.ASCENDING))
+        return render_template("definitions.html", definitions = mongo.db.definitions.find().sort("term",pymongo.ASCENDING),
+                                languages=mongo.db.language.find().sort("name",pymongo.ASCENDING))
+
+
+
+@app.route('/search_definition', methods=["POST"])
+def search_definition():
+    definitions = mongo.db.definitions
+    form = request.form.to_dict()
+    s_term = form["s_term"]
+    s_language = form["s_language"]
+    s_editor = form["s_editor"]
+
+    filter = {}
+    if s_term != "": filter['term'] = s_term
+    if s_language != "": filter['language'] = s_language
+    if s_editor != "": filter['user'] = s_editor
+    definitions = mongo.db.definitions.find(filter).sort("term",pymongo.ASCENDING)
+    result = definitions.count()
+
+    return render_template("definitions.html", 
+                            definitions = definitions,
+                            languages=mongo.db.language.find().sort("name",pymongo.ASCENDING),
+                            s_term = s_term, s_language = s_language, s_editor = s_editor, result = result)
+
 
 @app.route('/add_definition')
 def add_definition():
     return render_template('adddefinition.html',
-                            languages=mongo.db.language.find.find().sort("name",pymongo.ASCENDING))
+                            languages=mongo.db.language.find().sort("name",pymongo.ASCENDING))
+
+
 
 @app.route('/insert_definition', methods=['POST'])
 def insert_definition():
@@ -73,7 +99,7 @@ def add_user():
     user = mongo.db.user
     form = request.form.to_dict()
     name = form["user_name"]
-    email = form["user_email"]
+    email = form["user_email"].lower()
     userValidation = True
     pwValidation = True
     emailValidation = True
@@ -119,7 +145,7 @@ def user_login():
 @app.route('/check_user', methods=['GET', 'POST'])
 def check_user():
     form = request.form.to_dict()
-    email = form["user_email"]
+    email = form["user_email"].lower()
     users = mongo.db.user
     userCount = users.find({'email': email }).count()
     if userCount > 0:
@@ -140,7 +166,7 @@ def check_user():
 def user_edit():
     users = mongo.db.user
     user = users.find_one({"name": session["name"]})
-    email = user['email']        
+    email = user['email'].lower()        
     return render_template("user/edit.html", user_email = email, user_name = session['name'])
 
 @app.route('/update_user', methods=["POST"])
@@ -150,7 +176,7 @@ def update_user():
     userValidation = True
     pwValidation = True
     emailValidation = True
-    email = form["user_email"]
+    email = form["user_email"].lower()
     user = users.find_one({"name": session["name"]})
     userID = user['_id']
     userpw = user['password']

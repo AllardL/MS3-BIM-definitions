@@ -107,6 +107,23 @@ body {
     padding-right: 5px;
 }
 
+/*-------------------------Searchform-------------- */
+
+.btn.search {
+    margin: 0;
+    margin-bottom: 5px;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+
+
 /*-------------------------Media queries-------------- */
 @media (min-width: 575px) and (min-height: 800px){
     footer {
@@ -128,6 +145,5 @@ body {
     .heading {
         font-size: 2em;
         font-weight: 800;
-    }   
-
+    } 
 }
