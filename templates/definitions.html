@@ -28,21 +28,22 @@
     </div>
 </form>
 
-
-<div class="accordion" id="accordion">
-    {% if result == 0 %}
-        <h3 class="center">We found no results for your search!</h3>
-    {% else %}
+{% if result == 0 %}
+    <h3 class="center">I am sorry. We found no results for your search...</h3>
+{% else %}
+    <div class="accordion" id="accordion">
         {% for definition in definitions %}
         <div class="card">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{definition._id}}" aria-expanded="false" aria-controls="{{definition._id}}">
-                <div class="row card-header" id="{{definition._id}}">
+            <div class="card-header" id="{{definition._id}}">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{definition._id}}" aria-expanded="false" aria-controls="{{definition._id}}">
+                    <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <i class="material-icons">expand_more</i><strong>{{definition.term}}</strong>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <i class="material-icons">language</i><strong>{{definition.language}}</strong>
                         </div>
+                    </div>
                 </div>
             </button>
 
@@ -63,6 +64,7 @@
             </div>
         </div>
         {% endfor %}
-    {% endif %}
+    </div>
+{% endif %}
 </div>
 {% endblock %}   

@@ -44,7 +44,6 @@ strong {
 
 .container {
     max-width: 2050px;
-    margin-bottom: 15px;
 }
 
 .btn {
@@ -62,6 +61,7 @@ footer {
     right: auto;
     bottom: 0;
     width: 100vw;
+    background-color: 
 }
 
 hr {
@@ -72,18 +72,40 @@ hr {
 
 body {
     text-decoration: none;
+    position: relative;
+    min-height: 100vh;
 }
+
+
+#content-wrap {
+  padding-bottom: 9rem;    
+}
+
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8rem;
+}
+
 
 /*-------------------------Accordion-------------- */
 
 .card .btn {
     margin-top: 2px;
     margin-bottom: 2px;
+    text-align: left;
 }
 
 .card-header {
     text-align: left;
 }
+
+.card-header .btn {
+    width: 100%;
+}
+
 
 /*-------------------------Inputform-------------- */
 
@@ -128,14 +150,6 @@ body {
 
 /*-------------------------Media queries-------------- */
 @media (min-width: 575px) and (min-height: 800px){
-    footer {
-        position: fixed !important;
-        left: auto;
-        right: auto;
-        bottom: 0;
-        width: 100vw
-    }
-
     .logo {
         height: 40px;
     }
