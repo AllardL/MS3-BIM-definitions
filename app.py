@@ -34,9 +34,9 @@ def search_definition():
     s_editor = form["s_editor"]
 
     filter = {}
-    if s_term != "": filter['term'] = s_term
+    if s_term != "/^/i": filter['term'] = { '$regex' : s_term, '$options': '-i' }
     if s_language != "": filter['language'] = s_language
-    if s_editor != "": filter['user'] = s_editor
+    if s_editor != "": filter['user'] = { '$regex' : _editor, '$options': '-i' }
     definitions = mongo.db.definitions.find(filter).sort("term",pymongo.ASCENDING)
     result = definitions.count()
 
