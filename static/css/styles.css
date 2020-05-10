@@ -106,6 +106,25 @@ body {
     width: 100%;
 }
 
+.card-description {
+    margin-bottom: 15px;
+}
+
+.card-footer {
+    height: 3rem;
+    padding : 0;
+    background-color: white;
+    border-top-color: blue;
+    border-top-width: 1px;
+    padding: 10px;
+}
+
+.card-footer.btn {
+    margin-top: 0px !important;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
 
 /*-------------------------Inputform-------------- */
 
