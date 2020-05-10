@@ -9,13 +9,13 @@
             <div class="col-12">
                 <i class="material-icons prefix">assignment</i>
                 <label>BIM Term</label>
-                <input id="term" name="term" type="text" class="form-control">
+                <input id="term" name="term" type="text" required class="form-control">
             </div>
         </div>
         <div class="row form-group">
             <div class="col-12">
                 <label for="language"><i class="material-icons prefix">language</i> Language</label>
-                <select class="form-control" id="language" name="language">
+                <select class="form-control" id="language" required name="language">
                     {% for language in languages %}
                         <option value="{{language.name}}">{{language.name}}</option>
                     {% endfor %}
@@ -26,7 +26,7 @@
             <div class="col-12">
                 <i class="material-icons prefix">subject</i>
                 <label>Definition</label>
-                <textarea name="description" id="description" type="tel" class="form-control"></textarea>
+                <textarea name="description" id="description" type="tel" required class="form-control"></textarea>
             </div>
         </div>
         <div class="row form-group center">

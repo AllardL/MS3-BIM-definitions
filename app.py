@@ -7,13 +7,12 @@ import pymongo
 import re
 
 
-#MONGO_URI = (os.environ.get('MONGO_URI'))
-
+MONGO_URI = (os.environ.get('MONGO_URI'))
+SECRET_KEY = (os.environ.get('SECRET_KEY'))
 app = Flask(__name__)
 
-#app.config["MONGO_URI"] = MONGO_URI
-app.config["MONGO_URI"] = 'mongodb+srv://AllardDB:RxBuROru0OyhHyMC@gcpbelgium-fdk0n.gcp.mongodb.net/BIMDefinitions?retryWrites=true&w=majority'
-app.config["SECRET_KEY"] = "allard85368"
+app.config["MONGO_URI"] = MONGO_URI
+app.config["SECRET_KEY"] = SECRET_KEY
 
 mongo = PyMongo(app)
 
