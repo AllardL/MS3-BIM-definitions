@@ -55,7 +55,7 @@
                     <div class="center card-footer">
                         <span class="align-middle">Last modified by: {{definition.user}}</span>
                         {% if session.name %}
-                            <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary btn_small align-top">Edit</a>
+                            <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary">Edit</a>
                         {% else %} 
                             <a href="{{url_for('user_login')}}" class="btn btn-primary">Login to Edit or Add terms</a>
                         {% endif %}         
