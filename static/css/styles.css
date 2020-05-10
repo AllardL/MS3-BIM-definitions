@@ -24,8 +24,12 @@ strong {
     font-weight: 800;
 }
 
-/*-------------------------Navbar-------------- */
+.regular {
+    font-weight: 400;
+    color: gray;
+}
 
+/*-------------------------Navbar-------------- */
 .logo {
     height: 22px;
 }
@@ -94,12 +98,14 @@ body {
 
 .card .btn {
     margin-top: 2px;
-    margin-bottom: 2px;
+    margin-bottom: 12px;
     text-align: left;
 }
 
 .card-header {
     text-align: left;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .card-header .btn {
@@ -110,20 +116,24 @@ body {
     margin-bottom: 15px;
 }
 
-.card-footer {
-    height: 3rem;
-    padding : 0;
-    background-color: white;
-    border-top-color: blue;
-    border-top-width: 1px;
-    padding: 10px;
+.btn.edit {
+    text-align: center !important;
 }
 
-.card-footer.btn {
-    margin-top: 0px !important;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
+.card-col {
+    padding-top: 7px;
+}
+
+.col-language {
+    min-width: 200px !important;
+    max-width: auto !important;
+    padding-left: 15px;
+}
+
+.col-edit {
+    width: max-content !important;
+    position:  absolute;
+    right: 30px;
 }
 
 /*-------------------------Inputform-------------- */
@@ -165,10 +175,21 @@ body {
     border-radius: .25rem;
 }
 
+.row.search {
+    margin-top: 2vh;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: rgb(235, 235, 235); 
+    border-radius: 5px;
+}
+
+
 
 
 /*-------------------------Media queries-------------- */
-@media (min-width: 575px) and (min-height: 800px){
+@media (min-width: 992px) and (min-height: 800px){
     .logo {
         height: 40px;
     }
@@ -180,5 +201,9 @@ body {
     .heading {
         font-size: 2em;
         font-weight: 800;
-    } 
+    }
+
+    nav {
+       height: 50px;
+    }
 }

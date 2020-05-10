@@ -4,6 +4,9 @@
 
 <form action="{{url_for('search_definition') }} " method="POST" >
     <div class="row search">
+        <div class="col-12">
+            <h3>Search</h3>
+        </div>
         <div class="col-lg-5 col-md-4 col-sm-12 form-group">
             <input type="text" class="form-control" name = "s_term" placeholder="Search for Term" value="{{s_term}}">
         </div>
@@ -38,30 +41,31 @@
             <div class="card-header" id="{{definition._id}}">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{definition._id}}" aria-expanded="false" aria-controls="{{definition._id}}">
                     <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <i class="material-icons">expand_more</i><strong>{{definition.term}}</strong>
+                        <div class="col-lg-5 col-12 card-col">
+                            <i class="material-icons align-bottom">expand_more</i><strong>{{definition.term}}</strong>
                         </div>
-                        <div class="col-lg-6 col-md-12">
-                            <i class="material-icons">language</i><strong>{{definition.language}}</strong>
+                        <div class="col-lg-3 col-12 regular card-col">
+                            <i class="material-icons align-bottom">edit</i>Last modified by: {{definition.user}}
                         </div>
+                        <div class="col-language regular card-col">
+                            <i class="material-icons align-bottom">language</i>{{definition.language}}
+                        </div>
+                        <div class="col-edit align-top">
+                            {% if session.name %}
+                                <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary Edit">Edit</a>
+                            {% else %} 
+                                <a href="{{url_for('user_login')}}" class="btn btn-primary edit">Edit</a>
+                            {% endif %}         
+                        </div>  
                     </div>
-                </div>
-            </button>
+                </button>
+            </div>
 
             <div id="collapse{{definition._id}}" class="collapse" aria-labelledby="{{definition._id}}" data-parent="#accordion">
                 <div class="card-body">
                     <div class="card-description">
                         <span>{{definition.description}}</span>
-                    </div>
-                    <div class="center card-footer">
-                        <span class="align-middle">Last modified by: {{definition.user}}</span>
-                        {% if session.name %}
-                            <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary">Edit</a>
-                        {% else %} 
-                            <a href="{{url_for('user_login')}}" class="btn btn-primary">Login to Edit or Add terms</a>
-                        {% endif %}         
-                    </div>  
-                    
+                    </div>                  
                 </div>
             </div>
         </div>

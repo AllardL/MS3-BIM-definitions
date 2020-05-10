@@ -6,7 +6,6 @@ import bcrypt
 import pymongo
 import re
 
-
 MONGO_URI = (os.environ.get('MONGO_URI'))
 SECRET_KEY = (os.environ.get('SECRET_KEY'))
 app = Flask(__name__)

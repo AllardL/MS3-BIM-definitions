@@ -12,50 +12,59 @@ I decided to go for a simple not to cluttered design with no background picture.
 3. Bootstrap (4.3.1)
 4. Python
 5. Flask
+6. MongoDB
 
 ## Features to be implemented in future
-In future I would like to showcase some tools made for different BIM platforms.
+In future I will provide functionality to delete your account and recover password
 
 ## CONTENT
 All content is written by me.
-Hereby the general design for the pages. 
 
 ##      CONTENT OVERVIEW
-###     **HOME PAGE**
-    Short explenation about who we are, our policy and what we aim to do.
+###     **Home Page**
+List with all available terms and definitions sorted + search possibility. Search is not case sensitive + it is enough to just add a part of a term.
+![Home Page](static/Wireframes/Home%20Page.png)
+
+###     **User SignUp**
+User SignUp Page. Tests are added to verify.
+* name is unique
+* email is unique
+* password and password confirmation are the same
+
+![SignUp Page](static/Wireframes/SignUp.png)
 
 
-###     **OUR SERVICES**
-    Description of our range of service.
+###     **User Login** 
+Login Page. Test are added to verify Email and Password.
+![SignUp Page](static/Wireframes/Login.png)
+
+###     **Edit User**
+Possibility to edit Username or Password
+![SignUp Page](static/Wireframes/Edit%20user.png)
 
 
-###     **PROJECTS** 
-    Some projects that we already did.
+###     **Add Definition**
+Possibility to add definitions. Only possible after login. Username will be added to edited/added definition
+![SignUp Page](static/Wireframes/Add%20definition.png)
 
-
-###     **ABOUT US**
-    Short description about the key members of our team
-
-
-###     **CONTACT**
-    Possibility to send a message to one of our offices and a map to the headquarter.
-
-
+###     **Edit Definition**
+Possibility to edit existing definitions. Only possible after login. Username will be added to edited/added definition
+![SignUp Page](static/Wireframes/Edit%20definition.png)
 
 ## Testing
-The website is tested on different devices from smartphone to workstation with a 27" screen.
+The website is tested on different devices from smartphone to workstation with a 34" screen.
 CSS was tested several times on "different devices" using developer tools in different webbrowsers. Using life editing in the webbrowser different settings were tested and improved.
 
-[Freeformatter.com](https://www.freeformatter.com/html-validator.html) was using for code validation. ISO-8859-9 setting was used. During testing was mentioned to better use CSS for some settings instead of iframes which I adjusted.
-
 ## Deployment
-The website is hosted on GitHub pages. However once it is completele and agreed on by my collegues it will also be available on http://www.timbim.eu/
+The website is hosted on [Heroku](https://ms3-bim-definitions.herokuapp.com/).
+
+If you want to run the code locally, you can clone this repository into the editor of your choice by pasting: "git clone https://github.com/AllardL/MS3-BIM-definitions.git" into your terminal.
+To cut ties with this GitHub repository, type git remote rm origin into the terminal.
+
+This application makes use of MongoDB. If you want to use it you need to set up a database with the following collections: "definitions", "language" and "user" and provide the URI for the variable MONGO_URI,
+also a key needs to be provided at the variable SECRET_KEY.
 
 ## Media
-The backgroundimages were taken from [freeimages](https://freeimages.com/) for the rest the pictures are my own.
-Pictures of projects are of the respective clients.
-Snowpark Muscat Oman - [Giebros Technics Projects](http://giebrostechnics.nl/en/home/) - [Unlimited Snow](https://unlimitedsnow.com/)
-Quatuor - [VK Engineering](https://www.vkgroup.be)
-VRT headquarter - [VK Engineering](https://www.vkgroup.be)
+There was no media used from outside sources.
 
 ### This website is only for educational use. 
