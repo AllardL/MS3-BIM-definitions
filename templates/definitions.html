@@ -2,75 +2,76 @@
 {% block title %}Home Page{% endblock %}
 {% block content %}
 
-<form action="{{url_for('search_definition') }} " method="POST" >
-    <div class="row search">
-        <div class="col-12">
-            <h3>Search</h3>
-        </div>
-        <div class="col-lg-5 col-md-4 col-sm-12 form-group">
-            <input type="text" class="form-control" name = "s_term" placeholder="Search for Term" value="{{s_term}}">
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
-            <select class="form-control" id="language" name="s_language">
-                {% if s_language %}
-                    <option>{{s_language}}</option>
-                {% endif %}
-                <option></option>
-                {% for language in languages %}
-                    <option value="{{language.name}}">{{language.name}}</option>
-                {% endfor %}
-            </select>
+<form action="{{url_for('search_definition') }} " method="POST">
+	<div class="row search">
+		<div class="col-12">
+			<h3>Search</h3>
+		</div>
+		<div class="col-lg-5 col-md-4 col-sm-12 form-group">
+			<input type="text" class="form-control" name = "s_term" placeholder="Search for Term" value="{{s_term}}">
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 form-group">
             <input type="text" class="form-control" name = "s_editor" placeholder="Search for Editor" value="{{s_editor}}">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+            <select class="form-control" id="language" name="s_language">
+            {% if s_language %}
+                <option>{{s_language}}</option>
+            {% endif %}
+            <option></option>
+            {% for language in languages %}
+                <option value="{{language.name}}">{{language.name}}</option>
+            {% endfor %}
+            </select>
         </div>
         <div class="col-4 col-md-2 col-lg-1 form-group">
             <button class="btn btn-primary search" type="submit">
                 <i class="material-icons right">search</i>
             </button>
-        </div> 
+        </div>
     </div>
 </form>
 
 {% if result == 0 %}
-    <h3 class="center">I am sorry. We found no results for your search...</h3>
+<h3 class="center">I am sorry. We found no results for your search...</h3>
 {% else %}
-    <div class="accordion" id="accordion">
-        {% for definition in definitions %}
-        <div class="card">
-            <div class="card-header" id="{{definition._id}}">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{definition._id}}" aria-expanded="false" aria-controls="{{definition._id}}">
-                    <div class="row">
-                        <div class="col-lg-5 col-12 card-col">
-                            <i class="material-icons align-bottom">expand_more</i><strong>{{definition.term}}</strong>
-                        </div>
-                        <div class="col-lg-4 col-12 regular card-col">
-                            <i class="material-icons align-bottom">edit</i>Last modified by: {{definition.user}}
-                        </div>
-                        <div class="col-language regular card-col">
-                            <i class="material-icons align-bottom">language</i>{{definition.language}}
-                        </div>
-                        <div class="col-edit align-top">
-                            {% if session.name %}
-                                <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary Edit">Edit</a>
-                            {% else %} 
-                                <a href="{{url_for('user_login')}}" class="btn btn-primary edit">Edit</a>
-                            {% endif %}         
-                        </div>  
+<div class="accordion" id="accordion">
+	{% for definition in definitions %}
+	<div class="card">
+		<div class="card-header" id="{{definition._id}}">
+			<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{definition._id}}" aria-expanded="false" aria-controls="{{definition._id}}">
+                <div class="row">
+                    <div class="col-lg-5 col-12 card-col">
+                        <i class="material-icons align-bottom">expand_more</i><strong>{{definition.term}}</strong>
                     </div>
-                </button>
-            </div>
-
-            <div id="collapse{{definition._id}}" class="collapse" aria-labelledby="{{definition._id}}" data-parent="#accordion">
-                <div class="card-body">
-                    <div class="card-description">
-                        <span>{{definition.description}}</span>
-                    </div>                  
+                    <div class="col-lg-4 col-12 regular card-col">
+                        <i class="material-icons align-bottom">edit</i>Last modified by: {{definition.user}}
+                    </div>
+                    <div class="col-language regular card-col">
+                        <i class="material-icons align-bottom">language</i>{{definition.language}}
+                    </div>
+                    <div class="col-edit align-top">
+                        {% if session.name %}
+                            <a href="{{url_for('edit_definition', definition_id=definition._id)}}" class="btn btn-primary Edit">Edit</a>
+                        {% else %} 
+                            <a href="{{url_for('user_login')}}" class="btn btn-primary edit">Edit</a>
+                        {% endif %}         
+                    </div>  
                 </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+            </button>
+		</div>
+
+		<div id="collapse{{definition._id}}" class="collapse" aria-labelledby="{{definition._id}}"
+			data-parent="#accordion">
+			<div class="card-body">
+				<div class="card-description">
+					<span>{{definition.description}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
 {% endif %}
 </div>
-{% endblock %}   
+{% endblock %}

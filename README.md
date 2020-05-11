@@ -7,7 +7,9 @@ The result is a website where you can search the definitions you need, add defin
  
 ## UX
  
-The website is meant for people that need some insight in terms that are mentioned during BIM projects. Wireframes were made in Adobe XD
+The website is meant for people that need some insight in terms that are mentioned during BIM projects. The goal is to have terms in different languages, for that there is also the possibility to filter on language.
+
+Wireframes were made in Adobe XD
 
 ### **Home Page**
 List with all available terms and definitions sorted + search possibility. Search is not case sensitive + it is enough to just add a part of a term.
@@ -26,7 +28,7 @@ User SignUp Page. Tests are added to verify.
 ### **User Login** 
 Login Page. Test are added to verify Email and Password.
 
-    ![SignUp Page](static/Wireframes/Login.png)
+![SignUp Page](static/Wireframes/Login.png)
 
 ### **Edit User**
 Possibility to edit Username or Password
@@ -54,14 +56,13 @@ Possibility to edit existing definitions. Only possible after login. Username wi
     - Add definitions - allows users to add definitions that are still missing
     - Update definitions - allows users to edit definitions
     - Edit user information
+- The website did not require any JavaScript
 
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
-
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
 ### Features Left to Implement
 - Delete user account
 - Recover password
+- Flask forms to be implemented
 
 ## Technologies Used
 1. HTML
@@ -121,6 +122,7 @@ CSS was tested several times on "different devices" using developer tools in dif
 - Iphone
 
     ![SignUp Page](static/testScreens/iphone.png)
+
 ### Testing in in different browsers
 - Edge
 
@@ -135,7 +137,13 @@ CSS was tested several times on "different devices" using developer tools in dif
 
 ## Deployment
 
-The website is hosted on [Heroku](https://ms3-bim-definitions.herokuapp.com/).
+The website is hosted on [Heroku](https://ms3-bim-definitions.herokuapp.com/). This was done following next steps:
+1. Made requirements.txt with all dependencies
+2. Made a Procfile
+3. Commited everything to git
+4. Logged in to Heroku
+5. Created a site on Heroku by the following command in the terminal: "heroku apps: create MS3-BIM-definitions"
+6. Deployed the site with following command in the terminal: "Git push heroku master"
 
 If you want to run the code locally, you can clone this repository into the editor of your choice by pasting: "git clone https://github.com/AllardL/MS3-BIM-definitions.git" into your terminal.
 To cut ties with this GitHub repository, type git remote rm origin into the terminal.

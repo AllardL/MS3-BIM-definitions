@@ -9,14 +9,14 @@
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="user_email" required value={{user_email}}>
             <small id="emailHelp" class="form-text text-muted">Input needs to be a valid email format</small>
-            {% if emailValidation == False %}
+            {% if email_validation == False %}
                 <div class="failed">This email address is not yet registered</div>
             {% endif %}  
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password" required>
-            {% if pwValidation == False %}
+            {% if pw_validation == False %}
                 <div class="failed">The password is not correct</div>
             {% endif %}
         </div>

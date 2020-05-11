@@ -9,21 +9,21 @@
             <label for="user">Username</label>
             <input type="text" class="form-control" id="user_name" aria-describedby="userHelp" name="user_name" required value={{user_name}}>
             <small id="userHelp" class="form-text text-muted">Your username will be visible when adding or editing terms</small>
-            {% if userValidation == False %}
+            {% if user_validation == False %}
                 <div class="failed">Username is already in use</div>
             {% endif %} 
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="user_email" required value={{user_email}}>
-            {% if emailValidation == False %}
+            {% if email_validation == False %}
                 <div class="failed">This email address is not valid or already in use</div>
             {% endif %}        
         </div>
         <div class="form-group">
             <label for="password control-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" required/>
-            {% if pwValidation == False %}
+            {% if pw_validation == False %}
                 <div class="failed">Passwords did not match</div>
             {% endif %}
         </div>

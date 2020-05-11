@@ -9,7 +9,7 @@
             <label for="user">Username</label>
             <input type="text"  class="form-control" id="user" aria-describedby="userHelp" required name = "user_name" value={{user_name}}>
             <small id="userHelp" class="form-text text-muted">Your username will be visible when adding or editing terms</small>
-            {% if userValidation == False %}
+            {% if user_validation == False %}
                 <div class="failed">Username is already in use</div>
             {% endif %} 
         </div>
@@ -20,14 +20,14 @@
         <div class="form-group">
             <label for="password control-label">Old Password</label>
             <input type="password" class="form-control" id="oldpassword" name="oldPassword"/>
-            {% if pwValidationOld == False %}
+            {% if pw_validation_old == False %}
                 <div class="failed">Passwords is not correct</div>
             {% endif %}            
         </div>        
         <div class="form-group">
             <label for="password control-label">New Password</label>
             <input type="password" class="form-control" id="password" name="password"/>
-            {% if pwValidation == False %}
+            {% if pw_validation == False %}
                 <div class="failed">Passwords did not match</div>
             {% endif %}
         </div>
