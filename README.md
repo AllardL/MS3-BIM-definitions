@@ -143,7 +143,7 @@ The website is hosted on [Heroku](https://ms3-bim-definitions.herokuapp.com/). T
 3. Commited everything to git
 4. Logged in to Heroku
 5. Created a site on Heroku by the following command in the terminal: "heroku apps: create MS3-BIM-definitions"
-6. Deployed the site with following command in the terminal: "Git push heroku master"
+6. Deployed the site with following command in the terminal: "git push heroku master"
 
 If you want to run the code locally, you can clone this repository into the editor of your choice by pasting: "git clone https://github.com/AllardL/MS3-BIM-definitions.git" into your terminal.
 To cut ties with this GitHub repository, type git remote rm origin into the terminal.
