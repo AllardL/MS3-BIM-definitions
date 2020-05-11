@@ -12,7 +12,7 @@ The website is meant for people that need some insight in terms that are mention
 ### **Home Page**
 List with all available terms and definitions sorted + search possibility. Search is not case sensitive + it is enough to just add a part of a term.
 
-    ![Home Page](static/Wireframes/Home%20Page.png)
+![Home Page](static/Wireframes/Home%20Page.png)
 
 ### **User SignUp**
 User SignUp Page. Tests are added to verify.
@@ -20,7 +20,7 @@ User SignUp Page. Tests are added to verify.
 * email is unique
 * password and password confirmation are the same
 
-    ![SignUp Page](static/Wireframes/SignUp.png)
+![SignUp Page](static/Wireframes/SignUp.png)
 
 
 ### **User Login** 
@@ -31,17 +31,18 @@ Login Page. Test are added to verify Email and Password.
 ### **Edit User**
 Possibility to edit Username or Password
 
-    ![SignUp Page](static/Wireframes/Edit%20user.png)
+![SignUp Page](static/Wireframes/Edit%20user.png)
 
 
 ### **Add Definition**
 Possibility to add definitions. Only possible after login. Username will be added to edited/added definition
 
-    ![SignUp Page](static/Wireframes/Add%20definition.png)
+![SignUp Page](static/Wireframes/Add%20definition.png)
 
 ### **Edit Definition**
 Possibility to edit existing definitions. Only possible after login. Username will be added to edited/added definition
-    ![SignUp Page](static/Wireframes/Edit%20definition.png)
+    
+![SignUp Page](static/Wireframes/Edit%20definition.png)
 
 
 ## Features
